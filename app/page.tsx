@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Megaphone, Shield, Sparks, Vial, Virus } from "@/components/Art";
+import { Cell, Megaphone, Shield, Sparks, Vial, Virus } from "@/components/Art";
 import { TrueFalse } from "@/components/Games";
 import { myths, questions, sources } from "@/lib/data";
 
@@ -155,10 +155,10 @@ const fakes: [string, boolean, string][] = [
 ];
 
 const cells = [
-  ["célula normal", "#f4a6c8", "#e8578e"],
-  ["alterações nas células", "#e8578e", "#a8325f"],
-  ["possível evolução para câncer", "#a8325f", "#5c1a4a"],
-];
+  ["célula normal", "normal"],
+  ["alterações nas células", "altered"],
+  ["possível evolução para câncer", "cancer"],
+] as const;
 
 const steps: [string, string, ReactNode, ReactNode][] = [
   [
@@ -208,19 +208,18 @@ const steps: [string, string, ReactNode, ReactNode][] = [
       Outros podem provocar alterações nas células que, com o tempo, podem
       evoluir para <b>câncer</b>.
     </>,
-    <ol className="grid grid-cols-3 gap-2 text-center text-[11px] font-extrabold leading-tight">
-      {cells.map(([label, color, core]) => (
-        <li key={label}>
-          <span
-            className="mx-auto mb-1 grid size-11 place-items-center rounded-full"
-            style={{ background: color }}
-          >
-            <span
-              className="size-4 rounded-full"
-              style={{ background: core }}
-            />
-          </span>
-          {label}
+    <ol className="flex items-start justify-between text-center text-xs font-extrabold leading-tight">
+      {cells.map(([label, stage], idx) => (
+        <li key={stage} className="contents">
+          {idx > 0 && (
+            <span className="mt-5 font-display text-2xl text-stop" aria-hidden>
+              →
+            </span>
+          )}
+          <div className="w-20">
+            <Cell stage={stage} className="mx-auto mb-1 size-16" />
+            {label}
+          </div>
         </li>
       ))}
     </ol>,

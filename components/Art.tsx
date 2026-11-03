@@ -33,6 +33,57 @@ export function Virus({
   );
 }
 
+// wobbly closed outline; w = how irregular, k = how many bumps
+function blob(cx: number, cy: number, r: number, w = 0, k = 0) {
+  const pts = Array.from({ length: 48 }, (_, i) => {
+    const a = (i / 48) * 2 * Math.PI;
+    const rr = r * (1 + w * Math.sin(k * a) + w * 0.6 * Math.cos((k + 2) * a));
+    return `${(cx + rr * Math.cos(a)).toFixed(1)} ${(cy + rr * Math.sin(a)).toFixed(1)}`;
+  });
+  return `M${pts.join("L")}Z`;
+}
+
+const cluster = [
+  [21, 22, 13, "#a84a86"],
+  [41, 20, 12, "#8e3374"],
+  [19, 41, 12, "#8e3374"],
+  [40, 40, 14, "#a84a86"],
+  [30, 30, 11, "#7a2263"],
+] as const;
+
+export function Cell({
+  className,
+  stage,
+}: Art & { stage: "normal" | "altered" | "cancer" }) {
+  return (
+    <svg viewBox="0 0 60 60" className={className} aria-hidden>
+      {stage === "normal" && (
+        <>
+          <circle cx="30" cy="30" r="24" fill="#fbc6da" stroke="#e07aa3" strokeWidth="2" />
+          <circle cx="30" cy="30" r="7" fill="#e8578e" />
+          <circle cx="18" cy="22" r="1.8" fill="#e8a0be" />
+          <circle cx="41" cy="38" r="1.8" fill="#e8a0be" />
+        </>
+      )}
+      {stage === "altered" && (
+        <>
+          <path d={blob(30, 30, 23, 0.08, 3)} fill="#f08bb3" stroke="#c84f82" strokeWidth="2" />
+          <path d={blob(31, 29, 12, 0.12, 4)} fill="#b2306a" />
+          <circle cx="16" cy="36" r="3" fill="#b2306a" />
+          <circle cx="42" cy="18" r="2.2" fill="#b2306a" />
+        </>
+      )}
+      {stage === "cancer" &&
+        cluster.map(([x, y, r, fill]) => (
+          <g key={`${x}-${y}`}>
+            <path d={blob(x, y, r, 0.12, 5)} fill={fill} stroke="#4a1240" strokeWidth="1.5" />
+            <path d={blob(x + 1, y - 1, r * 0.55, 0.15, 3)} fill="#4a1240" />
+          </g>
+        ))}
+    </svg>
+  );
+}
+
 export function Vial({ className }: Art) {
   return (
     <svg viewBox="0 0 80 110" className={className} aria-hidden>
