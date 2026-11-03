@@ -22,6 +22,7 @@ const stats = [
   ["9–14", "anos: idade da vacina de rotina no SUS", "bg-mist"],
   ["1 dose", "é o esquema atual para esse público", "bg-peach"],
 ];
+//
 
 const basics = [
   [
@@ -165,8 +166,8 @@ const steps: [string, string, ReactNode, ReactNode][] = [
     "bg-plum",
     "bg-lilac",
     <>
-      É um vírus muito comum que pode infectar a <b>pele</b> e as{" "}
-      <b>mucosas</b>.
+      É um vírus muito comum que pode infectar a <b>pele</b> e as <b>mucosas</b>
+      .
     </>,
     <div className="flex gap-3 text-center text-xs font-extrabold">
       <span className="rounded-xl bg-white px-4 py-2">✋ pele</span>
@@ -302,7 +303,9 @@ export default function Home() {
         <section className="rounded-lg bg-white p-4 shadow-lg sm:p-6">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-4 rounded-md bg-gradient-to-r from-mist to-lilac p-5 sm:p-7">
             <h1 className="font-display uppercase leading-none">
-              <span className="block text-3xl sm:text-4xl">Afinal, o que é</span>
+              <span className="block text-3xl sm:text-4xl">
+                Afinal, o que é
+              </span>
               <span className="block text-7xl sm:text-8xl">HPV?</span>
             </h1>
             <p className="max-w-52 font-extrabold leading-relaxed">
@@ -341,9 +344,7 @@ export default function Home() {
               </li>
             ))}
             <li className="grid place-items-center p-3">
-              <Sticky>
-                Informação de verdade também é proteção! ♡
-              </Sticky>
+              <Sticky>Informação de verdade também é proteção! ♡</Sticky>
             </li>
           </ol>
 
