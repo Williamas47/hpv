@@ -1,23 +1,26 @@
-import { MitoOuVerdade, Quiz } from "@/components/Games";
-import { sources } from "@/lib/data";
+import type { ReactNode } from "react";
+import { Megaphone, Shield, Sparks, Vial, Virus } from "@/components/Art";
+import { TrueFalse } from "@/components/Games";
+import { myths, questions, sources } from "@/lib/data";
 
 const nav = [
   ["O que é", "#o-que-e"],
   ["Vacina", "#vacina"],
   ["Prevenção", "#prevencao"],
+  ["Fake news", "#fake-news"],
   ["Jogos", "#jogos"],
   ["Dúvidas", "#duvidas"],
 ];
 
 const stats = [
-  ["+200", "tipos de HPV conhecidos", "bg-pink-500"],
+  ["+200", "tipos de HPV conhecidos", "bg-blush"],
   [
     "~99%",
     "dos casos de câncer do colo do útero têm HPV por trás (OMS)",
-    "bg-violet-500",
+    "bg-lilac",
   ],
-  ["9–14", "anos: idade da vacina de rotina no SUS", "bg-sky-500"],
-  ["1 dose", "é o esquema atual para esse público", "bg-amber-500"],
+  ["9–14", "anos: idade da vacina de rotina no SUS", "bg-mist"],
+  ["1 dose", "é o esquema atual para esse público", "bg-peach"],
 ];
 
 const basics = [
@@ -25,25 +28,25 @@ const basics = [
     "🧬",
     "O que é",
     "HPV é a sigla de Papilomavírus Humano, um grupo de vírus que infecta pele e mucosas. É a infecção sexualmente transmissível (IST) mais comum do mundo.",
-    "from-pink-500 to-rose-500",
+    "bg-blush",
   ],
   [
     "🤝",
     "Como pega",
     "Pelo contato pele a pele na região genital, anal ou oral, com ou sem penetração. A transmissão pode ocorrer mesmo sem sintomas.",
-    "from-violet-500 to-purple-600",
+    "bg-lilac",
   ],
   [
     "👀",
     "Sintomas",
     "Na maioria das vezes, nenhum. Em alguns casos aparecem verrugas genitais. Outros tipos causam lesões silenciosas que, sem acompanhamento, podem virar câncer anos depois.",
-    "from-sky-500 to-cyan-500",
+    "bg-mist",
   ],
   [
     "🎗️",
     "Riscos",
     "Os tipos de alto risco (como 16 e 18) estão ligados ao câncer do colo do útero, e também a cânceres de vulva, vagina, pênis, ânus e garganta.",
-    "from-amber-500 to-orange-500",
+    "bg-peach",
   ],
 ];
 
@@ -79,25 +82,25 @@ const prevention = [
     "💉",
     "Vacina",
     "A principal forma de prevenção. O ideal é vacinar-se antes de qualquer exposição ao vírus.",
-    "border-pink-400 bg-pink-50",
+    "bg-blush",
   ],
   [
     "🛡️",
     "Preservativo",
     "Reduz o risco de HPV e protege contra outras ISTs, como HIV, sífilis e gonorreia. A proteção não é total, pois o vírus também pode estar na pele ao redor.",
-    "border-violet-400 bg-violet-50",
+    "bg-lilac",
   ],
   [
     "🩺",
     "Preventivo (Papanicolau)",
     "Quem tem colo do útero deve realizar o exame periodicamente na vida adulta (no SUS, a partir dos 25 anos). Ele detecta lesões precocemente, quando o tratamento é mais simples.",
-    "border-sky-400 bg-sky-50",
+    "bg-mist",
   ],
   [
     "💬",
     "Diálogo e informação",
     "Esclarecer dúvidas com responsáveis, professores e profissionais de saúde faz parte da prevenção. Prefira sempre fontes confiáveis.",
-    "border-amber-400 bg-amber-50",
+    "bg-peach",
   ],
 ];
 
@@ -128,18 +131,166 @@ const faq = [
   ],
 ];
 
+const fakes: [string, boolean, string][] = [
+  [
+    "A vacina contra o HPV causa HPV.",
+    false,
+    "A vacina não contém o vírus capaz de causar a infecção.",
+  ],
+  [
+    "Meninos também precisam se vacinar contra o HPV.",
+    true,
+    "A vacina protege meninos e meninas contra os tipos de HPV incluídos nela.",
+  ],
+  [
+    "É possível ter HPV sem sintomas.",
+    true,
+    "Nem sempre a infecção apresenta sinais visíveis.",
+  ],
+  [
+    "Só precisamos nos preocupar com o HPV quando ficamos adultos.",
+    false,
+    "A vacina é indicada a partir dos 9 anos. Cuide-se desde cedo!",
+  ],
+];
+
+const cells = [
+  ["célula normal", "#f4a6c8", "#e8578e"],
+  ["alterações nas células", "#e8578e", "#a8325f"],
+  ["possível evolução para câncer", "#a8325f", "#5c1a4a"],
+];
+
+const steps: [string, string, ReactNode, ReactNode][] = [
+  [
+    "bg-plum",
+    "bg-lilac",
+    <>
+      É um vírus muito comum que pode infectar a <b>pele</b> e as{" "}
+      <b>mucosas</b>.
+    </>,
+    <div className="flex gap-3 text-center text-xs font-extrabold">
+      <span className="rounded-xl bg-white px-4 py-2">✋ pele</span>
+      <span className="rounded-xl bg-white px-4 py-2">👄 mucosas</span>
+    </div>,
+  ],
+  [
+    "bg-ocean",
+    "bg-mist",
+    <>
+      Existem <b>vários tipos</b> de HPV.
+    </>,
+    <div>
+      <div className="flex items-center gap-1">
+        <Virus className="size-9" color="#c8506e" dot="#f7c04a" />
+        <Virus className="size-14" />
+        <Virus className="size-10" color="#2f6fb0" dot="#7fd0c0" />
+        <Virus className="size-8" color="#1c7a55" dot="#f7c04a" />
+      </div>
+      <p className="mt-2 inline-block rounded-full bg-ocean px-3 py-1 text-xs font-extrabold text-white">
+        São mais de 200 tipos!
+      </p>
+    </div>,
+  ],
+  [
+    "bg-ember",
+    "bg-peach",
+    <>
+      Alguns tipos podem causar <b>verrugas</b>.
+    </>,
+    <p className="text-4xl" aria-hidden>
+      🖐️
+    </p>,
+  ],
+  [
+    "bg-stop",
+    "bg-blush",
+    <>
+      Outros podem provocar alterações nas células que, com o tempo, podem
+      evoluir para <b>câncer</b>.
+    </>,
+    <ol className="grid grid-cols-3 gap-2 text-center text-[11px] font-extrabold leading-tight">
+      {cells.map(([label, color, core]) => (
+        <li key={label}>
+          <span
+            className="mx-auto mb-1 grid size-11 place-items-center rounded-full"
+            style={{ background: color }}
+          >
+            <span
+              className="size-4 rounded-full"
+              style={{ background: core }}
+            />
+          </span>
+          {label}
+        </li>
+      ))}
+    </ol>,
+  ],
+  [
+    "bg-go",
+    "bg-mint",
+    <>
+      A boa notícia é que existe uma <b>vacina</b> que ajuda a <b>prevenir</b>{" "}
+      os principais problemas causados pelo HPV!
+    </>,
+    <div className="flex items-center gap-3">
+      <Vial className="h-16 w-auto" />
+      <Shield className="h-16 w-auto" />
+      <span className="-rotate-2 rounded-lg bg-go px-3 py-1 font-hand text-lg leading-tight text-white">
+        Prevenção é proteção!
+      </span>
+    </div>,
+  ],
+];
+
+function Sheet({
+  id,
+  title,
+  sub,
+  children,
+}: {
+  id: string;
+  title: string;
+  sub: string;
+  children: ReactNode;
+}) {
+  return (
+    <section
+      id={id}
+      className="scroll-mt-20 rounded-lg bg-white p-5 shadow-lg sm:p-8"
+    >
+      <div className="text-center">
+        <div className="flex items-center justify-center gap-2">
+          <Sparks className="h-8 w-auto shrink-0" />
+          <h2 className="brush text-3xl sm:text-4xl">{title}</h2>
+          <Sparks className="h-8 w-auto shrink-0 -scale-x-100" />
+        </div>
+        <p className="mt-3 font-bold">{sub}</p>
+      </div>
+      <div className="mt-8">{children}</div>
+    </section>
+  );
+}
+
+function Sticky({ children }: { children: ReactNode }) {
+  return (
+    <p className="rotate-2 bg-sun p-4 text-center font-hand text-2xl leading-tight shadow-md">
+      {children}
+    </p>
+  );
+}
+
 export default function Home() {
   return (
-    <main className="flex-1 bg-white text-zinc-800">
-      <header className="sticky top-0 z-20 border-b border-white/20 bg-purple-950/90 backdrop-blur">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between gap-4 overflow-x-auto px-5 py-3 text-sm font-semibold text-white">
-          <a href="#" className="shrink-0 text-lg font-extrabold">
-            💜 Informa<span className="text-pink-400">HPV</span>
+    <main className="flex-1">
+      <header className="sticky top-0 z-20 bg-ink shadow-md">
+        <nav className="mx-auto flex max-w-6xl items-center justify-between gap-5 overflow-x-auto px-4 py-3 font-extrabold text-white">
+          <a href="#" className="shrink-0 font-display text-xl tracking-wide">
+            Descomplica <span className="text-sun">HPV</span>
           </a>
-          <ul className="flex gap-5">
+          <ul className="flex gap-5 text-sm">
             {nav.map(([l, h]) => (
               <li key={h}>
-                <a href={h} className="whitespace-nowrap hover:text-pink-300">
+                <a href={h} className="whitespace-nowrap hover:text-sun">
                   {l}
                 </a>
               </li>
@@ -148,185 +299,239 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-purple-900 via-fuchsia-700 to-pink-500 text-white">
-        <div className="pointer-events-none absolute -left-20 -top-20 size-80 rounded-full bg-sky-400/30 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-24 right-0 size-96 rounded-full bg-amber-300/30 blur-3xl" />
-        <div className="relative mx-auto max-w-4xl px-5 py-20 text-center sm:py-28">
-          <span className="rounded-full bg-white/20 px-4 py-1 text-sm font-bold">
-            Informação para adolescentes
-          </span>
-          <h1 className="mt-5 text-5xl font-black leading-tight sm:text-7xl">
-            Vacinação contra o <span className="text-amber-300">HPV</span>
-          </h1>
-          <p className="mx-auto mt-5 max-w-2xl text-lg text-white/90 sm:text-xl">
-            Conheça o vírus, saiba como a vacina protege e quais são as formas
-            de prevenção. Em seguida, teste seus conhecimentos nos jogos.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <a
-              href="#o-que-e"
-              className="rounded-full bg-white px-7 py-3 font-bold text-purple-800 shadow-lg transition hover:scale-105"
-            >
-              Saiba mais
-            </a>
+      <div className="mx-auto max-w-6xl space-y-8 px-4 py-8">
+        <section className="rounded-lg bg-white p-4 shadow-lg sm:p-6">
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4 rounded-md bg-gradient-to-r from-mist to-lilac p-5 sm:p-7">
+            <h1 className="font-display uppercase leading-none">
+              <span className="block text-3xl sm:text-4xl">Afinal, o que é</span>
+              <span className="block text-7xl sm:text-8xl">HPV?</span>
+            </h1>
+            <p className="max-w-52 font-extrabold leading-relaxed">
+              <span className="marker">
+                HPV é a sigla para Papilomavírus Humano.
+              </span>
+            </p>
+            <div className="ml-auto flex items-center">
+              <Virus className="size-24 sm:size-32" />
+              <Virus
+                className="-ml-3 size-14 self-end sm:size-20"
+                color="#2f6fb0"
+                dot="#7fd0c0"
+              />
+              <span className="-ml-2 -rotate-6 self-start font-hand text-2xl">
+                É um vírus!
+              </span>
+            </div>
+          </div>
+
+          <ol className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {steps.map(([badge, bg, text, art], idx) => (
+              <li
+                key={badge}
+                className={`flex flex-col gap-3 rounded-xl p-4 ${bg}`}
+              >
+                <div className="flex gap-3">
+                  <span
+                    className={`grid size-9 shrink-0 place-items-center rounded-full font-display text-xl text-white ${badge}`}
+                  >
+                    {idx + 1}
+                  </span>
+                  <p className="font-semibold">{text}</p>
+                </div>
+                <div className="mt-auto">{art}</div>
+              </li>
+            ))}
+            <li className="grid place-items-center p-3">
+              <Sticky>
+                Informação de verdade também é proteção! ♡
+              </Sticky>
+            </li>
+          </ol>
+
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 rounded-md bg-ink px-5 py-4 text-white">
+            <p className="font-display text-2xl tracking-wide">
+              🧪 Descomplica <span className="text-sun">HPV</span>
+            </p>
+            <p className="font-bold">
+              Seja um <span className="text-sun">cientista júnior</span> e
+              dissemine informações!
+            </p>
             <a
               href="#jogos"
-              className="rounded-full bg-amber-400 px-7 py-3 font-bold text-purple-950 shadow-lg transition hover:scale-105"
+              className="rounded-full bg-sun px-5 py-2 font-display text-ink transition hover:scale-105"
             >
-              Ir para os jogos
+              Ir para o quiz
             </a>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto -mt-10 grid max-w-6xl gap-4 px-5 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map(([n, t, c]) => (
-          <div
-            key={n}
-            className={`${c} relative rounded-3xl p-6 text-white shadow-xl`}
-          >
-            <p className="text-4xl font-black">{n}</p>
-            <p className="mt-1 text-sm font-medium text-white/90">{t}</p>
-          </div>
-        ))}
-      </section>
-
-      <section
-        id="o-que-e"
-        className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20"
-      >
-        <h2 className="text-center text-3xl font-black text-purple-900 sm:text-4xl">
-          O básico sobre o HPV
-        </h2>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-zinc-600">
-          Informações essenciais sobre o vírus.
-        </p>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
-          {basics.map(([i, t, d, g]) => (
-            <article
-              key={t}
-              className={`rounded-3xl bg-gradient-to-br ${g} p-7 text-white shadow-lg`}
-            >
-              <div className="text-4xl" aria-hidden>
-                {i}
-              </div>
-              <h3 className="mt-3 text-2xl font-extrabold">{t}</h3>
-              <p className="mt-2 text-white/95">{d}</p>
-            </article>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map(([n, t, c]) => (
+            <li key={n} className={`${c} rounded-xl p-5 shadow-md`}>
+              <p className="font-display text-4xl">{n}</p>
+              <p className="mt-1 text-sm font-bold">{t}</p>
+            </li>
           ))}
-        </div>
-      </section>
+        </ul>
 
-      <section
-        id="vacina"
-        className="scroll-mt-16 bg-gradient-to-b from-sky-50 to-violet-50 py-20"
-      >
-        <div className="mx-auto max-w-6xl px-5">
-          <h2 className="text-center text-3xl font-black text-purple-900 sm:text-4xl">
-            Sobre a vacina
-          </h2>
-          <p className="mx-auto mt-2 max-w-2xl text-center text-zinc-600">
-            Gratuita, segura e disponível no SUS.
-          </p>
-          <dl className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Sheet
+          id="o-que-e"
+          title="O básico sobre o HPV"
+          sub="Informações essenciais sobre o vírus."
+        >
+          <div className="grid gap-4 sm:grid-cols-2">
+            {basics.map(([i, t, d, c]) => (
+              <article key={t} className={`rounded-xl p-6 ${c}`}>
+                <div className="text-4xl" aria-hidden>
+                  {i}
+                </div>
+                <h3 className="mt-2 font-display text-2xl">{t}</h3>
+                <p className="mt-1 font-semibold">{d}</p>
+              </article>
+            ))}
+          </div>
+        </Sheet>
+
+        <Sheet
+          id="vacina"
+          title="Sobre a vacina"
+          sub="Gratuita, segura e disponível no SUS."
+        >
+          <dl className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {vaccine.map(([t, d], idx) => (
-              <div
-                key={t}
-                className="rounded-3xl bg-white p-6 shadow ring-1 ring-purple-100"
-              >
-                <span className="grid size-10 place-items-center rounded-full bg-purple-600 font-black text-white">
-                  {idx + 1}
-                </span>
-                <dt className="mt-3 text-xl font-extrabold text-purple-800">
-                  {t}
-                </dt>
-                <dd className="mt-1 text-zinc-600">{d}</dd>
+              <div key={t} className="rounded-xl bg-mist p-5">
+                <div className="flex items-center gap-3">
+                  <span className="grid size-9 shrink-0 place-items-center rounded-full bg-ocean font-display text-xl text-white">
+                    {idx + 1}
+                  </span>
+                  <dt className="font-display text-xl">{t}</dt>
+                </div>
+                <dd className="mt-2 font-semibold">{d}</dd>
               </div>
             ))}
           </dl>
-        </div>
-      </section>
+        </Sheet>
 
-      <section
-        id="prevencao"
-        className="mx-auto max-w-6xl scroll-mt-16 px-5 py-20"
-      >
-        <h2 className="text-center text-3xl font-black text-purple-900 sm:text-4xl">
-          Como se proteger
-        </h2>
-        <p className="mx-auto mt-2 max-w-2xl text-center text-zinc-600">
-          As medidas de prevenção se complementam.
-        </p>
-        <div className="mt-10 grid gap-5 md:grid-cols-2">
-          {prevention.map(([i, t, d, c]) => (
-            <article
-              key={t}
-              className={`flex gap-4 rounded-3xl border-l-8 p-6 ${c}`}
-            >
-              <div className="text-4xl" aria-hidden>
-                {i}
-              </div>
-              <div>
-                <h3 className="text-xl font-extrabold text-zinc-900">{t}</h3>
-                <p className="mt-1 text-zinc-700">{d}</p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <section
-        id="jogos"
-        className="scroll-mt-16 bg-gradient-to-br from-purple-950 via-purple-800 to-fuchsia-700 py-20"
-      >
-        <div className="mx-auto max-w-6xl px-5">
-          <h2 className="text-center text-3xl font-black text-white sm:text-4xl">
-            Teste seus conhecimentos
-          </h2>
-          <p className="mx-auto mt-2 mb-10 max-w-2xl text-center text-white/80">
-            Em caso de dúvida, revise as seções acima. Cada resposta traz uma
-            explicação.
-          </p>
-          <div className="mx-auto grid max-w-2xl gap-6">
-            <MitoOuVerdade />
-            <Quiz />
+        <Sheet
+          id="prevencao"
+          title="Como se proteger"
+          sub="As medidas de prevenção se complementam."
+        >
+          <div className="grid gap-4 md:grid-cols-2">
+            {prevention.map(([i, t, d, c]) => (
+              <article key={t} className={`flex gap-4 rounded-xl p-5 ${c}`}>
+                <div className="text-4xl" aria-hidden>
+                  {i}
+                </div>
+                <div>
+                  <h3 className="font-display text-xl">{t}</h3>
+                  <p className="mt-1 font-semibold">{d}</p>
+                </div>
+              </article>
+            ))}
           </div>
-        </div>
-      </section>
+        </Sheet>
 
-      <section
-        id="duvidas"
-        className="mx-auto max-w-3xl scroll-mt-16 px-5 py-20"
-      >
-        <h2 className="text-center text-3xl font-black text-purple-900 sm:text-4xl">
-          Dúvidas frequentes
-        </h2>
-        <div className="mt-10 space-y-3">
-          {faq.map(([q, a]) => (
-            <details
-              key={q}
-              className="group rounded-2xl bg-purple-50 p-5 open:bg-pink-50"
-            >
-              <summary className="cursor-pointer list-none font-bold text-purple-900 after:float-right after:text-pink-600 after:content-['+'] group-open:after:content-['–']">
-                {q}
-              </summary>
-              <p className="mt-3 text-zinc-700">{a}</p>
-            </details>
-          ))}
-        </div>
-      </section>
+        <section
+          id="fake-news"
+          className="scroll-mt-20 rounded-lg bg-white p-5 shadow-lg sm:p-8"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 rounded-md bg-lilac p-5">
+            <Megaphone className="h-20 w-auto" />
+            <div className="text-center">
+              <h2 className="brush text-5xl uppercase tracking-wide sm:text-7xl">
+                Fake <span className="text-sun">news</span>
+              </h2>
+              <p className="mt-3 font-extrabold">
+                <span className="marker">
+                  Vamos separar o que é mito do que é verdade?
+                </span>
+              </p>
+            </div>
+          </div>
 
-      <section className="mx-auto max-w-4xl px-5 pb-20">
-        <div className="rounded-3xl bg-gradient-to-r from-pink-500 to-amber-400 p-10 text-center text-purple-950 shadow-xl">
-          <h2 className="text-3xl font-black">Procure a vacinação</h2>
-          <p className="mx-auto mt-2 max-w-xl font-medium">
+          <ul className="mt-5 grid gap-4 md:grid-cols-2">
+            {fakes.map(([text, truth, why]) => (
+              <li
+                key={text}
+                className={`rounded-xl p-5 ${truth ? "bg-mint" : "bg-blush"}`}
+              >
+                <span className={`tag text-xl ${truth ? "bg-go" : "bg-stop"}`}>
+                  {truth ? "✓ Verdade" : "✕ Mito"}
+                </span>
+                <p className="mt-3 text-lg font-extrabold">“{text}”</p>
+                <p className="mt-2 font-semibold">{why}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-5 flex flex-wrap items-center justify-between gap-4 rounded-md bg-lilac p-5">
+            <p className="max-w-56 rounded-2xl rounded-bl-none bg-sun p-3 font-bold">
+              Tem mercúrio na vacina?{" "}
+              <span className="tag ml-1 bg-stop">Mito</span>
+            </p>
+            <p className="brush text-2xl sm:text-3xl">Não espalhe fake news!</p>
+            <p className="flex items-center gap-2 font-hand text-xl leading-tight">
+              <Shield className="h-12 w-auto shrink-0" />
+              <span>
+                Vacinação é ciência,
+                <br />é saúde, é futuro! ♡
+              </span>
+            </p>
+          </div>
+        </section>
+
+        <Sheet
+          id="jogos"
+          title="Teste seus conhecimentos"
+          sub="Em caso de dúvida, revise as seções acima. Cada resposta traz uma explicação."
+        >
+          <div className="grid items-start gap-5 lg:grid-cols-2">
+            <TrueFalse
+              title="Quiz: verdadeiro ou falso?"
+              items={questions}
+              labels={["Falso", "Verdadeiro"]}
+              bg="bg-mist"
+            />
+            <TrueFalse
+              title="Mito ou verdade?"
+              items={myths}
+              labels={["Mito", "Verdade"]}
+              bg="bg-lilac"
+            />
+          </div>
+        </Sheet>
+
+        <Sheet
+          id="duvidas"
+          title="Dúvidas frequentes"
+          sub="Toque em uma pergunta para ver a resposta."
+        >
+          <div className="mx-auto max-w-3xl space-y-3">
+            {faq.map(([q, a]) => (
+              <details
+                key={q}
+                className="group rounded-xl bg-lilac p-4 open:bg-peach"
+              >
+                <summary className="cursor-pointer list-none font-extrabold after:float-right after:font-display after:text-xl after:content-['+'] group-open:after:content-['–']">
+                  {q}
+                </summary>
+                <p className="mt-2 font-semibold">{a}</p>
+              </details>
+            ))}
+          </div>
+        </Sheet>
+
+        <section className="rounded-lg bg-sun p-8 text-center shadow-lg">
+          <h2 className="font-display text-3xl">Procure a vacinação</h2>
+          <p className="mx-auto mt-2 max-w-xl font-bold">
             Dirija-se à UBS mais próxima com a caderneta de vacinação e um
             documento. Compartilhe a informação com familiares e amigos.
           </p>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <footer className="bg-purple-950 px-5 py-10 text-center text-sm text-white/70">
+      <footer className="bg-ink px-5 py-10 text-center text-sm text-white/80">
         <p>
           Conteúdo educativo, não substitui orientação de profissionais de
           saúde. Confirme regras e idades de vacinação na sua UBS.

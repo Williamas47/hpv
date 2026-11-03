@@ -1,7 +1,6 @@
-export type Myth = { text: string; truth: boolean; why: string };
-export type Question = { q: string; options: string[]; answer: number; why: string };
+export type Statement = { text: string; truth: boolean; why: string };
 
-export const myths: Myth[] = [
+export const myths: Statement[] = [
   { text: "A vacina do HPV é só para meninas.", truth: false, why: "Meninos também devem se vacinar. A vacina protege contra verrugas genitais e cânceres de pênis, ânus e garganta." },
   { text: "A vacina do HPV previne vários tipos de câncer.", truth: true, why: "Principalmente o câncer do colo do útero, mas também vulva, vagina, pênis, ânus e orofaringe." },
   { text: "A vacina deixa a pessoa infértil.", truth: false, why: "Não há evidência científica disso. Milhões de doses já foram aplicadas no mundo com segurança." },
@@ -14,12 +13,22 @@ export const myths: Myth[] = [
   { text: "Quem se vacinou não precisa fazer o exame preventivo (Papanicolau) no futuro.", truth: false, why: "A vacina não cobre todos os tipos de HPV. Quem tem colo do útero deve fazer o exame na vida adulta." },
 ];
 
-export const questions: Question[] = [
-  { q: "Qual é a faixa etária da vacinação de rotina contra o HPV no SUS?", options: ["9 a 14 anos", "18 a 25 anos", "Só depois dos 30"], answer: 0, why: "A vacinação de rotina é de 9 a 14 anos, em dose única. Quem não foi vacinado e já passou dessa idade deve consultar a UBS." },
-  { q: "Quantas doses são necessárias para o público de 9 a 14 anos?", options: ["Uma", "Três", "Uma por ano, para sempre"], answer: 0, why: "O Ministério da Saúde adotou o esquema de dose única, que já oferece boa proteção." },
-  { q: "HPV é a sigla de…", options: ["Herpes Pele Viral", "Papilomavírus Humano", "Hepatite Pulmonar Viral"], answer: 1, why: "Papilomavírus Humano. Existem mais de 200 tipos, e alguns causam câncer." },
-  { q: "Quando a vacina é mais eficaz?", options: ["Depois de ter HPV", "Antes do contato com o vírus", "Só quando há sintomas"], answer: 1, why: "Ela é preventiva: o ideal é vacinar-se antes de qualquer exposição ao vírus." },
-  { q: "Onde é possível se vacinar?", options: ["Só em hospital particular", "Na UBS (posto de saúde) ou na escola", "Só com receita médica"], answer: 1, why: "A vacina é gratuita nas UBS e, em campanhas, nas escolas. Não é necessária receita médica." },
+export const questions: Statement[] = [
+  { text: "O HPV é um vírus.", truth: true, why: "HPV é a sigla de Papilomavírus Humano." },
+  { text: "Só meninas podem contrair HPV.", truth: false, why: "Meninos e meninas podem contrair HPV." },
+  { text: "A vacina é uma forma de prevenir o HPV.", truth: true, why: "A vacina é a principal forma de prevenção contra o HPV." },
+  { text: "A vacinação contra o HPV é gratuita pelo SUS.", truth: true, why: "Ela está disponível sem custo nas UBS e, em campanhas, nas escolas." },
+  { text: "Abraços e convívio social transmitem HPV.", truth: false, why: "Abraços e convívio social não transmitem HPV." },
+  { text: "A infecção pelo HPV pode não causar sintomas.", truth: true, why: "Na maioria das vezes não há sintomas, e a pessoa nem sabe que tem o vírus." },
+  { text: "O melhor momento para se vacinar é depois do contato com o HPV.", truth: false, why: "Vacinar antes do possível contato é o ideal." },
+  { text: "Alguns tipos de HPV podem causar câncer.", truth: true, why: "Os tipos de alto risco, como 16 e 18, estão ligados ao câncer do colo do útero e a outros cânceres." },
+  { text: "HPV é uma bactéria.", truth: false, why: "HPV é vírus, não bactéria." },
+  { text: "A vacina contra o HPV é indicada apenas para meninas.", truth: false, why: "A vacina também é indicada para meninos." },
+  { text: "Quem tem HPV sempre desenvolve câncer.", truth: false, why: "Ter HPV não significa desenvolver câncer. Na maioria dos casos, o organismo elimina o vírus." },
+  { text: "A vacina previne doenças relacionadas ao HPV.", truth: true, why: "Ela protege contra verrugas genitais e cânceres ligados ao vírus." },
+  { text: "O HPV pode ser transmitido mesmo sem sintomas.", truth: true, why: "Quem tem o vírus pode transmiti-lo mesmo sem perceber nenhum sinal." },
+  { text: "A prevenção contra o HPV só começa na vida adulta.", truth: false, why: "A prevenção começa antes da vida adulta." },
+  { text: "Vacinar-se é um cuidado com a saúde.", truth: true, why: "Vacinação é cuidado com a saúde." },
 ];
 
 export const sources = [

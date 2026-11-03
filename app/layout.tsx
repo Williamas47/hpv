@@ -1,29 +1,38 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Lilita_One, Nunito, Patrick_Hand } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const lilita = Lilita_One({
+  variable: "--font-lilita",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const patrick = Patrick_Hand({
+  variable: "--font-patrick",
+  weight: "400",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "HPV: mito ou verdade?",
-  description: "Jogos interativos sobre a vacina do HPV para adolescentes.",
+  title: "Descomplica HPV",
+  description: "Tudo sobre o HPV e a vacina, com quiz para adolescentes.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${nunito.variable} ${lilita.variable} ${patrick.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-full flex-col bg-lilac font-sans text-ink">
+        {children}
+      </body>
     </html>
   );
 }
