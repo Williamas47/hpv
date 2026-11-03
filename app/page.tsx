@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Cell, Megaphone, Shield, Sparks, Vial, Virus } from "@/components/Art";
+import { Cell, Hand, Megaphone, Mouth, Shield, Skin, Wart, Sparks, Vial, Virus } from "@/components/Art";
 import { TrueFalse } from "@/components/Games";
 import { myths, questions, sources } from "@/lib/data";
 
@@ -156,7 +156,7 @@ const fakes: [string, boolean, string][] = [
 ];
 
 const cells = [
-  ["célula normal", "normal"],
+  ["célula saudável", "normal"],
   ["alterações nas células", "altered"],
   ["possível evolução para câncer", "cancer"],
 ] as const;
@@ -169,9 +169,16 @@ const steps: [string, string, ReactNode, ReactNode][] = [
       É um vírus muito comum que pode infectar a <b>pele</b> e as <b>mucosas</b>
       .
     </>,
-    <div className="flex gap-3 text-center text-xs font-extrabold">
-      <span className="rounded-xl bg-white px-4 py-2">✋ pele</span>
-      <span className="rounded-xl bg-white px-4 py-2">👄 mucosas</span>
+    <div className="flex justify-center gap-6 text-center text-xs font-extrabold">
+      <div>
+        <Skin className="mx-auto mb-1 size-16" />
+        pele
+      </div>
+      <div>
+        <Mouth className="mx-auto mb-1 size-16" />
+        mucosas
+        <span className="block font-semibold">(ex.: boca)</span>
+      </div>
     </div>,
   ],
   [
@@ -198,9 +205,16 @@ const steps: [string, string, ReactNode, ReactNode][] = [
     <>
       Alguns tipos podem causar <b>verrugas</b>.
     </>,
-    <p className="text-4xl" aria-hidden>
-      🖐️
-    </p>,
+    <div className="flex items-center justify-center gap-2">
+      <Hand className="h-20 w-auto" />
+      <span className="font-display text-2xl text-ember" aria-hidden>
+        →
+      </span>
+      <div className="text-center text-xs font-extrabold">
+        <Wart className="mx-auto mb-1 size-16" />
+        exemplo de verruga
+      </div>
+    </div>,
   ],
   [
     "bg-stop",
