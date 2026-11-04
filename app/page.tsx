@@ -565,7 +565,7 @@ export default function Home() {
           ))}
         </ul>
       </footer>
-      <footer className="bg-sun px-5 py-5 text-center text-sm font-bold text-ink">
+      <footer className="bg-black px-5 py-5 text-center text-sm text-white/70">
         Trabalho desenvolvido pelos alunos da TXI do Curso de Medicina da
         Uninove - Bauru/SP
       </footer>
