@@ -543,6 +543,14 @@ export default function Home() {
             documento. Compartilhe a informação com familiares e amigos.
           </p>
         </section>
+
+        <section className="rounded-lg bg-white p-8 text-center shadow-lg">
+          <h2 className="font-display text-3xl">Quem fez</h2>
+          <p className="mx-auto mt-2 max-w-xl font-bold">
+            Trabalho desenvolvido pelos alunos da TXI do Curso de Medicina da
+            Uninove - Bauru/SP
+          </p>
+        </section>
       </div>
 
       <footer className="bg-ink px-5 py-10 text-center text-sm text-white/80">
